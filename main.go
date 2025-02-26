@@ -2,16 +2,19 @@ package main
 
 import (
 	"log"
-	"net"
 	"net/http"
 )
 
 func main(){
-	s, _ := net.Listen("tcp", "127.0.0.1:3000")
-	c, _ := s.Accept()
-	c.Write([]byte(`{"name": "leandro", "age": 17}`))
-	log.Println("running!")
-	return
+	// s, _ := net.Listen("tcp", "127.0.0.1:3000")
+	// log.Println("before accepting")
+	// c, _ := s.Accept()
+	// var b [1024]byte
+	// c.Read(b [:])
+	// log.Println(b)
+	// c.Write([]byte(`{"name": "leandro", "age": 17}`))
+	// log.Println("after accepting!")
+	// return
 	
 	
 
