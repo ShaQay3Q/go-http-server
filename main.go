@@ -22,15 +22,17 @@ func main(){
 
 	// recieve the request
 	var b [1024]byte
+	numbOfBytes, _ :=  connection.Read(b[:])
 	// parse request into string
-	req := string(b[:])
+	req := string(b[:numbOfBytes])
+	jsonRes := `{"name": "leandro", "age": 17}`
+	// resLeng := len(jsonRes)
 
-	if strings.HasPrefix(req, "GET /contact HTTP/1.1\r\nHost: 127.0.0.1:3000\r\n\r\n"){
+	if strings.HasPrefix(req, "GET /contact HTTP/1.1\r\nHost: 127.0.0.1:3001\r\n\r\n"){
 		response := "HTTP/1.1 200 OK\r\n" +
 			"Content-Type: application/json\r\n" +
 			"Content-Length: 32\r\n" +
-			"\r\n" +
-			`{"name": "leandro", "age": 17}`
+			"\r\n" + jsonRes
 
 		connection.Write([]byte(response))
 	} else {
