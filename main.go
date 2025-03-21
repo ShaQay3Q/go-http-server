@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -17,21 +18,23 @@ func main(){
 		log.Fatal("Error starting the server", err)
 	}
 	
-	// set up cpnnection to server
+	// set up connection to server
 	connection, _ := server.Accept()
 
 	// recieve the request
 	var b [1024]byte
 	numbOfBytes, _ :=  connection.Read(b[:])
 	// parse request into string
-	req := string(b[:numbOfBytes])
-	jsonRes := `{"name": "leandro", "age": 17}`
+	req := string(b[0:numbOfBytes]) // sub-slice
+	log.Println(req)
+	jsonRes := `{"name": "Maria", "age": 17}`
+	resLength := len(jsonRes)
 	// resLeng := len(jsonRes)
 
-	if strings.HasPrefix(req, "GET /contact HTTP/1.1\r\nHost: 127.0.0.1:3001\r\n\r\n"){
+	if strings.HasPrefix(req, "GET /contact HTTP/1.1\r\n"){
 		response := "HTTP/1.1 200 OK\r\n" +
 			"Content-Type: application/json\r\n" +
-			"Content-Length: 32\r\n" +
+			"Content-Length: " + strconv.Itoa(resLength) + "\r\n" +
 			"\r\n" + jsonRes
 
 		connection.Write([]byte(response))
