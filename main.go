@@ -32,7 +32,7 @@ func main(){
 	// resLeng := len(jsonRes)
 
 	if strings.HasPrefix(req, "GET /contact HTTP/1.1\r\n"){
-		response := "HTTP/1.1 200 OK\r\n" +
+		response := "HTTP/1.1 200 OK\r\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 gi" +
 			"Content-Type: application/json\r\n" +
 			"Content-Length: " + strconv.Itoa(resLength) + "\r\n" +
 			"\r\n" + jsonRes
